@@ -17,11 +17,14 @@ RUN rm /var/www/html/index.html
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-RUN a2dismod mpm_event && \ 
-    a2enmod mpm_prefork && \ 
-    a2enmod php5.6 
+RUN a2dismod mpm_prefork && \ 
+    a2dismod php5.6 
 
-RUN a2enmod actions fcgid alias proxy_fcgi
+RUN a2enconf php5.6-fpm
+
+RUN a2enmod proxy_fcgi proxy mpm_event rewrite
+
+RUN echo "cgi.fix_pathinfo=1" >> /etc/php/5.6/fpm/php.ini
 
 EXPOSE 80
 # CMD ["apache2ctl", "-D", "FOREGROUND"]
