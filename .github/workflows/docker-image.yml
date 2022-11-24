@@ -12,4 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build iamge php
-      run: docker build ./php --file Dockerfile --tag php5.6:latest
+      run: 
+        docker build ./php --file Dockerfile --tag ghcr.io/zuzustack/php5.6:latest
+        docker run ghcr.io/zuzustack/php5.6:latest
+        docker push ghcr.io/zuzustack/php5.6:latest
+
