@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rena-image:latest
+FROM ghcr.io/zuzustack/php5.6:latest
 
 RUN apt-get update 
 

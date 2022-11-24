@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rena-image:fpm
+FROM ghcr.io/zuzustack/php5.6:fpm
 
 RUN apt-get update 
 

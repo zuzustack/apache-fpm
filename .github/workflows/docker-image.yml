@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: login to GitHub Container Registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -22,3 +22,32 @@ jobs:
         docker build --pull --rm -f "php/Dockerfile" --tag ghcr.io/${{ github.actor }}/php5.6:latest "php" &&
         docker push ghcr.io/${{ github.actor }}/php5.6:latest
 
+  build-fpm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - name: Build image php
+      run: 
+        docker build --pull --rm -f "fpm/Dockerfile" --tag ghcr.io/${{ github.actor }}/php5.6:fpm "fpm" &&
+        docker push ghcr.io/${{ github.actor }}/php5.6:fpm
+
+  build-apache:
+    runs-on: ubuntu-latest
+    steps:
+    - name: login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - name: Build image php
+      run: 
+        docker build --pull --rm -f "apache/Dockerfile" --tag ghcr.io/${{ github.actor }}/apache-fpm:latest "apache" &&
+        docker push ghcr.io/${{ github.actor }}/apache-fpm:latest
