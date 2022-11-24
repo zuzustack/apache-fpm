@@ -26,4 +26,4 @@ RUN a2enmod actions fcgid alias proxy_fcgi
 EXPOSE 80
 # CMD ["apache2ctl", "-D", "FOREGROUND"]
 
-CMD service postgresql start && service php5.6-fpm start && apache2ctl -D FOREGROUND
+CMD service php5.6-fpm start && apache2ctl -D FOREGROUND
